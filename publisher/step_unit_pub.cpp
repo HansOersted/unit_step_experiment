@@ -1,5 +1,6 @@
 #include "rclcpp/rclcpp.hpp"
 #include "autoware_auto_control_msgs/msg/ackermann_control_command.hpp"
+#include <limits>
 
 class ControlCommandPublisher : public rclcpp::Node
 {
@@ -18,8 +19,8 @@ private:
         auto control_command = autoware_auto_control_msgs::msg::AckermannControlCommand();
         // set the lateral control command
         control_command.lateral.stamp = this->get_clock()->now();
-        control_command.lateral.steering_tire_angle = 0.0;
-        control_command.lateral.steering_tire_rotation_rate = 0.0;
+        control_command.lateral.steering_tire_angle = 1.0;
+        control_command.lateral.steering_tire_rotation_rate = std::numeric_limits<double>::infinity();
 
         // set the longitudinal control command
         control_command.longitudinal.stamp = this->get_clock()->now();
