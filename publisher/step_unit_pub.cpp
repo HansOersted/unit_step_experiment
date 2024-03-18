@@ -42,7 +42,7 @@ private:
         control_command.lateral.stamp = now;
         control_command.longitudinal.stamp = now;
 
-        RCLCPP_INFO(this->get_logger(), "Publishing control command at time '%s'", control_command.stamp.to_string().c_str());
+        RCLCPP_INFO(this->get_logger(), "Publishing control command at time '%ld.%09ld'", control_command.stamp.sec, control_command.stamp.nanosec);
         publisher_->publish(control_command);
     }
 
