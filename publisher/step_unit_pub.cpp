@@ -26,20 +26,20 @@ private:
         auto control_command = autoware_auto_control_msgs::msg::AckermannControlCommand();
         rclcpp::Time now = this->get_clock()->now();
 
-        if ((now - start_time_).seconds() < 5.0) {
+        if ((now - start_time_).seconds() < 10.0) {
             // For the first 10 seconds, publish zeros
             control_command.lateral.steering_tire_angle = 0.0;
             control_command.lateral.steering_tire_rotation_rate = 0.0;
             control_command.longitudinal.acceleration = 0.0;
             control_command.longitudinal.jerk = 0.0;
-            control_command.longitudinal.speed = 0.0;
+            control_command.longitudinal.speed = 0.001;
         } else {
             // After 10 seconds, publish the actual values
-            control_command.lateral.steering_tire_angle = 1.0;
+            control_command.lateral.steering_tire_angle = 0.5;
             control_command.lateral.steering_tire_rotation_rate = std::numeric_limits<double>::infinity();
             control_command.longitudinal.acceleration = 0.0; // Set to your desired value
             control_command.longitudinal.jerk = 0.0; // Set to your desired value
-            control_command.longitudinal.speed = 0.0; // Set to your desired value
+            control_command.longitudinal.speed = 0.001; // Set to your desired value
         }
 
         // Set the time stamp
